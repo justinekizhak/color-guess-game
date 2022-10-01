@@ -6,6 +6,7 @@ import {
   onMount,
   Show,
 } from "solid-js";
+import anime from "animejs";
 
 const App: Component = (props) => {
   const _props = mergeProps({ numberOfOptions: 4 }, props);
@@ -15,6 +16,7 @@ const App: Component = (props) => {
   const [isCorrect, setIsCorrect] = createSignal<boolean>();
 
   let el: HTMLDivElement | undefined = undefined;
+  let messageEl: HTMLDivElement | undefined = undefined;
 
   const setup = () => {
     setIsCorrect(undefined);
@@ -41,14 +43,33 @@ const App: Component = (props) => {
   };
 
   const handleClick = (color: string) => {
-    setIsCorrect(undefined);
+    resetMessage();
     setTimeout(() => {
       if (color === colors()[correctOption()]) {
         setIsCorrect(true);
       } else {
         setIsCorrect(false);
       }
-    }, 100);
+      fadeIn();
+    }, 300);
+  };
+
+  const resetMessage = () => {
+    anime({
+      targets: messageEl,
+      translateY: -60,
+      opacity: 0,
+      maxHeight: 0,
+    });
+  };
+
+  const fadeIn = () => {
+    anime({
+      targets: messageEl,
+      translateY: [-60, 0],
+      opacity: [0, 1],
+      maxHeight: 60,
+    });
   };
 
   return (
@@ -70,9 +91,9 @@ const App: Component = (props) => {
           )}
         </For>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center" ref={messageEl}>
         <Show when={isCorrect() !== undefined}>
-          <div class="rounded bg-cool-gray-300 mt-4 py-2 px-12 inline-flex justify-center">
+          <div class="rounded bg-cool-gray-300 mt-4 py-2 px-12 inline-flex justify-center overflow-hidden">
             {isCorrect() ? (
               <div class="text-green-800">You are correct</div>
             ) : (
