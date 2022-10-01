@@ -1,7 +1,8 @@
 /* @refresh reload */
-import { render } from 'solid-js/web';
+import { render } from "solid-js/web";
 
-import './index.css';
-import App from './App';
+import "virtual:windi.css";
+import "./global.css";
+import App from "./App";
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+render(() => <App />, document.getElementById("root") as HTMLElement);
