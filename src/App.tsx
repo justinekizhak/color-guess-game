@@ -9,7 +9,7 @@ import {
 import anime from "animejs";
 
 const App: Component = (props) => {
-  const _props = mergeProps({ numberOfOptions: 4 }, props);
+  const _props = mergeProps({ numberOfOptions: 3 }, props);
 
   const [colors, setColors] = createSignal<string[]>([]);
   const [correctOption, setCorrectOption] = createSignal<number>(0);
