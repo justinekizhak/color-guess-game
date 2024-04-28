@@ -9,7 +9,7 @@ import {
 } from "solid-js";
 
 const App: Component = (props) => {
-  const _props = mergeProps({ numberOfOptions: 4 }, props);
+  const _props = mergeProps({ numberOfOptions: 3 }, props);
 
   const [colors, setColors] = createSignal<string[]>([]);
   const [correctOption, setCorrectOption] = createSignal<number>(0);
@@ -96,7 +96,7 @@ const App: Component = (props) => {
         </div>
       </div>
       <div class="h-screen flex flex-col items-center justify-center">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center">
+        <div class="grid grid-cols-3 md:grid-cols-3 gap-4 justify-center">
           <For each={colors()}>
             {(color) => (
               <button
